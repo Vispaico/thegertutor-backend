@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 
 // Initialize Firebase Admin with error handling
-const serviceAccount = require('./service-account.json');
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 try {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -14,7 +14,7 @@ try {
   console.log('Firebase Admin initialized successfully');
 } catch (error) {
   console.error('Error initializing Firebase Admin:', error);
-  process.exit(1); // Exit if Firebase fails to initialize
+  process.exit(1);
 }
 
 // Middleware
